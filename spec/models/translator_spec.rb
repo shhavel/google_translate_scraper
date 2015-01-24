@@ -44,32 +44,32 @@ describe GoogleTranslateScraper::Models::Translator do
     let(:arguments) { {:source_language => 'en', :target_language => 'sv', :search_text => 'hello my friend'} }
     let(:subject) { GoogleTranslateScraper::Models::Translator.new(arguments)}
 
-      context "a required argument was missing" do
+    context "a required argument was missing" do
 
-        it "returns an error" do
-          subject.instance_variable_set("@source_language", nil)
-          response = subject.translate
-          response.errors.first.message.should == "Required argument missing: source_language"
-        end
+      it "returns an error" do
+        subject.instance_variable_set("@source_language", nil)
+        response = subject.translate
+        response.errors.first.message.should == "Required argument missing: source_language"
       end
+    end
 
-      context "multiple arguments are missing" do
+    context "multiple arguments are missing" do
 
-        it "returns multiple errors" do
-          subject.instance_variable_set("@source_language", nil)
-          subject.instance_variable_set("@target_language", nil)
-          response = subject.translate
-          response.errors.size.should == 2
-        end
+      it "returns multiple errors" do
+        subject.instance_variable_set("@source_language", nil)
+        subject.instance_variable_set("@target_language", nil)
+        response = subject.translate
+        response.errors.size.should == 2
       end
+    end
 
-      context "no translations were found" do
+    context "no translations were found" do
 
-        it "returns an error" do
-          subject.stub(:fetch_from_google)
-          response = subject.translate
-          response.errors.first.message.should == "No translations were found. Google might have changed their HTML"
-        end
+      it "returns an error" do
+        subject.stub(:fetch_from_google)
+        response = subject.translate
+        response.errors.first.message.should == "No translations were found. Google might have changed their HTML"
       end
+    end
   end
 end

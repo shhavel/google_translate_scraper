@@ -53,7 +53,7 @@ module GoogleTranslateScraper
         eotf = "1"
         file = ""
 
-        http_response =  Net::HTTP.post_form(URI.parse('http://translate.google.com/'), {:sl => source_language, :tl => target_language, :js => js, :prev => prev, hv => hv, :ie =>
+        http_response = Net::HTTP.post_form(URI.parse('https://translate.google.com/'), {:sl => source_language, :tl => target_language, :js => js, :prev => prev, hv => hv, :ie =>
             ie , :layout => layout, :eotf => eotf, :text => search_text, :file => file})
         html_string = http_response.body
         Nokogiri::HTML(html_string)
